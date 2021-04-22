@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+/*
+Theme Name: guitar-world
+
+Author: Alexandr Baranov
+Description: guitar shop site
+Requires PHP: 7.4
+Version: 1
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: guitar-world
+
+ */
+
+.logo__img {
+    width: 127px;
+    height: 60px;
+}
+.product__img{
+    width:100%;
+    object-fit: contain;
+}
+.product__size {
+    transition: all 0.3s;
+    flex-grow: 1;
+}
+.product__size.is-active{
+    flex-grow: 2;
+}
