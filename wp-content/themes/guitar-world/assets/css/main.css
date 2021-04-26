@@ -44,6 +44,12 @@ main {
     display: block;
 }
 
+.body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 /**
  * Correct the font size and margin on `h1` elements within `section` and
  * `article` contexts in Chrome, Firefox, and Safari.
@@ -594,6 +600,7 @@ img {
     color: #e6e6e6;
     border-right: 1px solid #e5e5e5;
     transition: border .2s, background .2s, color .2s;
+    text-decoration: none;
 }
 
 .catalog-nav__btn.is-active {
@@ -1246,6 +1253,59 @@ img {
 }
 
 /* section-top end */
+
+/* start single */
+.single-page {
+    padding-top: 170px;
+    flex-grow: 1;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.nav-links span,
+.nav-links a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid grey;
+    color: grey;
+    border-right: 0;
+    transition: all 0.2s;
+}
+
+.nav-links > *:last-child {
+    border-right: 1px solid grey;;
+}
+
+.nav-links .current {
+    background-color: #1f1f1f;
+    color: white;
+}
+
+.nav-links a:hover {
+    background-color: #ffa650;
+    color: white;
+    border-color:#ffa650 ;
+}
+
+@media (max-width: 992px) {
+    .single-page {
+        padding-top: 110px;
+    }
+}
+
+/* end single */
+
 
 /* section-about start */
 .section-about {

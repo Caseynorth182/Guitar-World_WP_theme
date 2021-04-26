@@ -180,7 +180,7 @@
 
 /* catalog start */
 ;(function () {
-    var catalogSection = document.querySelector('.section-catalog');
+    var catalogSection = document.querySelector('.js-section-catalog');
 
     if (catalogSection === null) {
         return;
@@ -226,9 +226,11 @@
         var filteredItems = [];
         for (var i = 0; i < catalogItems.length; i += 1) {
             var current = catalogItems[i];
-            if (current.getAttribute('data-category') === filterValue) {
+            let categories = current.getAttribute('data-category').split(',');
+            if(categories.indexOf(filterValue) !== -1 ){
                 filteredItems.push(current);
             }
+
         }
 
         updateChildren(catalog, filteredItems);
@@ -300,7 +302,9 @@
 /* map start */
 ;(function () {
     var sectionContacts = document.querySelector('.section-contacts');
-
+    if(sectionContacts === null ){
+        return
+    }
     var ymapInit = function () {
         if (typeof ymaps === 'undefined') {
             return;

@@ -22,7 +22,7 @@
     <title>Guitar - world </title>
     <?php wp_head(); ?>
 </head>
-<body>
+<body <?php body_class();?>>
 
 <!-- header-page -->
 <header class="header-page">

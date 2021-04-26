@@ -98,6 +98,13 @@ function crb_attach_theme_options() {
              ) )
              ->add_tab( 'Каталог', array(
                  Field::make( 'text', 'catalog_title', 'Заголовок' ),
+                 Field::make( 'association', 'catalog_nav', 'Категории товаров' )
+                      ->set_types( [
+                          [
+                              'type'      => 'term',
+                              'taxonomy' => 'product_categories',
+                          ]
+                      ] ),
                  //делаем ассоциацию с типом записи
                  Field::make( 'association', 'catalog_products', 'Товары' )
                       ->set_types( [

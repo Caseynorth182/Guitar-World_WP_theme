@@ -4,9 +4,18 @@ $products_attributes = carbon_get_post_meta( $products_id, 'product_attributes' 
 
 $product_img_src      = get_the_post_thumbnail_url( $products_id, 'thumbnail' );
 $product_img_src_webp = conver_to_webp_src( $product_img_src );
+
+$product_categories = get_the_terms($products_id, 'product_categories');
+$products_categories_str = '';
+foreach ($product_categories as $cat){
+    $products_categories_str .= "$cat->slug,";
+}
+$products_categories_str = substr($products_categories_str, 0, -1);
+$products_categories_arr = explode(',', $products_categories_str);
+
 ?>
 
-<div class="catalog__item" data-category="mushrooms">
+<div class="catalog__item" data-category="<?php echo $products_categories_arr[1]; ?>">
     <div class="product catalog__product">
         <picture>
             <?php the_post_thumbnail('full', [

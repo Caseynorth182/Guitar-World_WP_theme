@@ -29,26 +29,39 @@ $top_img_src_webp = conver_to_webp_src( $img_src );
 <!-- /.section-top -->
 
 <!-- section-catalog -->
-<section id="section-catalog" class="section section-catalog">
+<section id="section-catalog" class="section section-catalog js-section-catalog">
     <div class="container">
         <header class="section__header">
             <h2 class="page-title page-title--accent">
                 <?php echo carbon_get_post_meta( get_the_ID(), 'catalog_title' ); ?>
             </h2>
             <nav class="catalog-nav">
+                <?php
+                    $catalog_nav = carbon_get_post_meta(14, 'catalog_nav');
+                    $catalog_nav_ids = [];
+                    foreach ($catalog_nav as $item){
+                        $catalog_nav_ids[] = $item['id'];
+                    }
+                    $catalog_nav_items = get_terms([
+                            'include' => $catalog_nav_ids,
+                    ]);
+                ?>
                 <ul class="catalog-nav__wrapper">
                     <li class="catalog-nav__item">
                         <button class="catalog-nav__btn is-active" type="button" data-filter="all">все</button>
                     </li>
+                    <?php
+                        if($catalog_nav_items):
+                            foreach ($catalog_nav_items as $item):
+                    ?>
+
                     <li class="catalog-nav__item">
-                        <button class="catalog-nav__btn" type="button" data-filter="mushrooms">грибные</button>
+                        <button class="catalog-nav__btn" type="button" data-filter="<?php echo  $item->slug?>"><?php echo  $item->name?></button>
                     </li>
-                    <li class="catalog-nav__item">
-                        <button class="catalog-nav__btn" type="button" data-filter="meat">мясные</button>
-                    </li>
-                    <li class="catalog-nav__item">
-                        <button class="catalog-nav__btn" type="button" data-filter="cheese">сырные</button>
-                    </li>
+                   <?php
+                   endforeach;
+                   endif;
+                   ?>
                 </ul>
             </nav>
         </header>
@@ -88,8 +101,8 @@ $top_img_src_webp = conver_to_webp_src( $img_src );
 <section class="section section-about">
     <picture>
         <?php
-        $top_img_id       = carbon_get_post_meta( get_the_ID(), 'about_image' );
-        $img_src          = wp_get_attachment_url( $top_img_id, 'full' );
+        $rew_img_id       = carbon_get_post_meta( 14, 'about_image' );
+        $img_src          = wp_get_attachment_url( $rew_img_id, 'full' );
         $top_img_src_webp = conver_to_webp_src( $img_src );
         ?>
 
@@ -100,11 +113,11 @@ $top_img_src_webp = conver_to_webp_src( $img_src );
     <div class="container section-about__container">
         <div class="section-about__content">
             <h2 class="page-title section-about__title">
-                <?php echo carbon_get_post_meta( get_the_ID(), 'catalog_title' ); ?>
+                <?php echo carbon_get_post_meta( 14, 'catalog_title' ); ?>
             </h2>
             <div class="section-about__text">
                 <?php
-                echo carbon_get_post_meta( get_the_ID(), 'about_text' );
+                echo carbon_get_post_meta( 14, 'about_text' );
                 ?>
             </div>
         </div>
