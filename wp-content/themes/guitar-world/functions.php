@@ -65,6 +65,16 @@ function create_global_var() {
     ];
 }
 
+//menu filter // фильтр для того что при переходе по вкладкам товаров в меню подсвечивалось активная ссылка "КАТАЛОГ"
+add_filter( 'nav_menu_css_class', 'add_current_class_on_tax_page', 10, 4 );
+function add_current_class_on_tax_page( $classes){
+    $post_type = get_post_type();
+    if(is_tax() && $post_type === 'products' && array_search('menu-item-object-products', $classes)){
+        array_push($classes, 'current-menu-item');
+    }
+    return $classes;
+}
+
 
 //CARBON FIELDS
 use Carbon_Fields\Container;

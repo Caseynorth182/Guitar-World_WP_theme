@@ -44,10 +44,14 @@ main {
     display: block;
 }
 
-.body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+body {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
+}
+
+.content {
+    flex: 1 0 auto;
 }
 
 /**
@@ -746,11 +750,26 @@ img {
     height: 100%;
 }
 
+.product__link {
+    text-decoration: none;
+    color: #1f1f1f;
+}
+
+.product__img-link:hover .product__img {
+    transform: scale(1.05);
+}
+
 .product__img {
     display: block;
     margin: 0 auto 15px;
     width: 340px;
     height: 207px;
+    transition: transform 0.3s;
+}
+
+.product__img--large {
+    width: 400px;
+    height: auto;
 }
 
 .product__title {
@@ -1055,9 +1074,39 @@ img {
 }
 
 /* logo end */
-
+.section-catalog__footer {
+    text-align: center;
+}
 /* components end */
+.link {
+    text-decoration: none;
+    color: inherit;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: "Montserrat", sans-serif;
+    display: inline-block;
+    padding-bottom: 3px;
+    position: relative;
+    transition: opacity .2s;
+}
 
+.link::before {
+    content: '';
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    background-color: #1f1f1f;
+    transition: transform .4s;
+}
+.link:hover::before{
+    transform: translateX(-50%) scale(0);
+}
+.link:active {
+    opacity: 0.7;
+}
 /* header-page start */
 .header-page {
     position: fixed;
@@ -1089,6 +1138,10 @@ img {
     display: flex;
     margin: 0;
     padding: 0;
+}
+
+.header-page__ul .current-menu-item a:not(:hover) {
+    color: #ffa650;
 }
 
 .header-page__link,
@@ -1260,6 +1313,19 @@ img {
     flex-grow: 1;
 }
 
+.single-page__container {
+    width: 780px;
+}
+
+.single-page__content {
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+.single-page__content p {
+    margin: 40px 0;
+}
+
 .nav-links {
     display: flex;
     justify-content: center;
@@ -1295,7 +1361,7 @@ img {
 .nav-links a:hover {
     background-color: #ffa650;
     color: white;
-    border-color:#ffa650 ;
+    border-color: #ffa650;
 }
 
 @media (max-width: 992px) {
@@ -1518,6 +1584,7 @@ img {
 .footer-page {
     background: linear-gradient(to top, #2d2c2c, #1f1f1f);
     padding: 25px 0;
+    flex: 0 0 auto;
 }
 
 .footer-page__text {

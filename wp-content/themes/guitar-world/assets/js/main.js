@@ -240,7 +240,7 @@
 
 /* product start */
 ;(function () {
-    var catalog = document.querySelector('.catalog');
+    var catalog = document.querySelector('.js-catalog');
 
     if (catalog === null) {
         return;

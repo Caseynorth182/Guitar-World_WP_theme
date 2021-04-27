@@ -17,22 +17,19 @@ get_header();
                     ?>
                     <ul class="catalog-nav__wrapper">
                         <li class="catalog-nav__item">
-                            <a href="<?php echo get_home_url(null, 'products/')?>" class="catalog-nav__btn ">все</a>
+                            <a href="<?php echo get_home_url( null, 'products/' ) ?>" class="catalog-nav__btn ">все</a>
                         </li>
                         <?php
                         if ( $catalog_nav_items ):
                             foreach ( $catalog_nav_items as $item ):
-                                $product_active_class = strpos($_SERVER['REQUEST_URI'], $item->slug) !== false ? ' is-active' : '';
+                                $product_active_class = strpos( $_SERVER['REQUEST_URI'], $item->slug ) !== false ? ' is-active' : '';
                                 ?>
-
                                 <li class="catalog-nav__item">
-                                    <a href="<?php echo get_home_url(null, 'product_categories/'.$item->slug)?>" class="catalog-nav__btn <?php echo $product_active_class?>" type="button">
+                                    <a href="<?php echo get_home_url( null, 'product_categories/' . $item->slug ) ?>"
+                                       class="catalog-nav__btn <?php echo $product_active_class ?>" type="button">
                                         <?php echo $item->name ?>
                                     </a>
                                 </li>
-
-
-
                             <?php
                             endforeach;
                         endif;
@@ -43,16 +40,12 @@ get_header();
 
             <div class="catalog">
                 <?php
-
-
                 if ( have_posts() ):
                     while ( have_posts() ):
                         the_post();
-
                         ?>
 
                         <?php echo get_template_part( 'product-content' ) ?>
-
 
                     <?php
                     endwhile;

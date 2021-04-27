@@ -1,10 +1,13 @@
-
 <?php
-
+/*
+ * Template name: О Нас
+ */
 get_header();
 $page_id = get_the_ID();
 
 ?>
+
+
     <section class="section single-page">
         <div class="container single-page__container">
             <h1 class="page-title">
@@ -25,7 +28,7 @@ $page_id = get_the_ID();
                 wp_reset_postdata();
             endif;
             ?>
-
     </section>
-
-<?php get_footer();?>
+<?php
+get_footer();
+?>

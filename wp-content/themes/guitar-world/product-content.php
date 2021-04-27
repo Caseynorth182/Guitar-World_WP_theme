@@ -5,25 +5,30 @@ $products_attributes = carbon_get_post_meta( $products_id, 'product_attributes' 
 $product_img_src      = get_the_post_thumbnail_url( $products_id, 'thumbnail' );
 $product_img_src_webp = conver_to_webp_src( $product_img_src );
 
-$product_categories = get_the_terms($products_id, 'product_categories');
+$product_categories      = get_the_terms( $products_id, 'product_categories' );
 $products_categories_str = '';
-foreach ($product_categories as $cat){
+foreach ( $product_categories as $cat ) {
     $products_categories_str .= "$cat->slug,";
 }
-$products_categories_str = substr($products_categories_str, 0, -1);
-$products_categories_arr = explode(',', $products_categories_str);
+$products_categories_str = substr( $products_categories_str, 0, - 1 );
+$products_categories_arr = explode( ',', $products_categories_str );
 
 ?>
 
 <div class="catalog__item" data-category="<?php echo $products_categories_arr[1]; ?>">
     <div class="product catalog__product">
-        <picture>
-            <?php the_post_thumbnail('full', [
-                'class' => "product__img lazy",
-            ]);?>
-        </picture>
+
+        <a href="<?php the_permalink(); ?>" class="product__img-link">
+            <picture>
+                <?php the_post_thumbnail( 'full', [
+                    'class' => "product__img lazy",
+                ] ); ?>
+            </picture>
+        </a>
         <div class="product__content">
-            <h3 class="product__title"><?php the_title(); ?></h3>
+            <a href="<?php the_permalink(); ?>" class="product__link">
+                <h3 class="product__title"><?php the_title(); ?></h3>
+            </a>
             <div class="product__description">
                 <?php the_excerpt(); ?>
             </div>
@@ -36,16 +41,17 @@ $products_categories_arr = explode(',', $products_categories_str);
                 <div class="product__sizes">
                     <?php
                     $is_first_item = true;
-                    foreach ($products_attributes as $attribute):
+                    foreach ( $products_attributes as $attribute ):
                         $attr_active_class = $is_first_item ? ' is-active' : '';
-                    ?>
-                    <button data-product-size-price="<?php echo $attribute['price']?>" class="product__size<?php echo $attr_active_class?>" type="button">
-                        <?php echo $attribute['name']?>
-                    </button>
+                        ?>
+                        <button data-product-size-price="<?php echo $attribute['price'] ?>"
+                                class="product__size<?php echo $attr_active_class ?>" type="button">
+                            <?php echo $attribute['name'] ?>
+                        </button>
 
-                    <?php
+                        <?php
                         $is_first_item = false;
-                        endforeach;
+                    endforeach;
                     ?>
                 </div>
             <?php

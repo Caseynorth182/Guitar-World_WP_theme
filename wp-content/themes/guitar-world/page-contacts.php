@@ -1,135 +1,10 @@
 <?php
 /*
-Template Name: Главная
-*/
-
-get_header();
-?>
-
-
-<!-- section-top -->
-<?php
-$top_img_id       = carbon_get_post_meta( get_the_ID(), 'top_image' );
-$img_src          = wp_get_attachment_url( $top_img_id, 'full' );
-$top_img_src_webp = conver_to_webp_src( $img_src );
-?>
-<section class="section-top lazy" data-src="<?php echo $img_src ?>"
-         data-src-replace-webp="<?php echo $top_img_src_webp ?>">
-    <div class="container section-top__container">
-        <p class="section-top__info"><?php echo carbon_get_post_meta( get_the_ID(), 'top_info' ); ?></p>
-        <h1 class="section-top__title"><?php echo carbon_get_post_meta( get_the_ID(), 'top_title' ); ?></h1>
-        <div class="section-top__btn">
-            <button class="btn" type="button"
-                    data-scroll-to="<?php echo carbon_get_post_meta( get_the_ID(), 'top_button_scroll' ); ?>">
-                <?php echo carbon_get_post_meta( get_the_ID(), 'top_button_text' ); ?>
-            </button>
-        </div>
-    </div>
-</section>
-<!-- /.section-top -->
-
-<!-- section-catalog -->
-<section id="section-catalog" class="section section-catalog js-section-catalog js-catalog">
-    <div class="container">
-        <header class="section__header">
-            <h2 class="page-title page-title--accent">
-                <?php echo carbon_get_post_meta( get_the_ID(), 'catalog_title' ); ?>
-            </h2>
-            <nav class="catalog-nav">
-                <?php
-                    $catalog_nav = carbon_get_post_meta(14, 'catalog_nav');
-                    $catalog_nav_ids = [];
-                    foreach ($catalog_nav as $item){
-                        $catalog_nav_ids[] = $item['id'];
-                    }
-                    $catalog_nav_items = get_terms([
-                            'include' => $catalog_nav_ids,
-                    ]);
-                ?>
-                <ul class="catalog-nav__wrapper">
-                    <li class="catalog-nav__item">
-                        <button class="catalog-nav__btn is-active" type="button" data-filter="all">все</button>
-                    </li>
-                    <?php
-                        if($catalog_nav_items):
-                            foreach ($catalog_nav_items as $item):
-                    ?>
-
-                    <li class="catalog-nav__item">
-                        <button class="catalog-nav__btn" type="button" data-filter="<?php echo  $item->slug?>"><?php echo  $item->name?></button>
-                    </li>
-                   <?php
-                   endforeach;
-                   endif;
-                   ?>
-                </ul>
-            </nav>
-        </header>
-
-        <div class="catalog">
-            <?php
-            $catalog_products     = carbon_get_post_meta( 14, 'catalog_products' );
-            $catalog_products_ids = wp_list_pluck( $catalog_products, 'id' );
-
-            $catalog_products_query_args = [
-                'post_type' => 'products',
-                'post_in'   => $catalog_products_ids,
-            ];
-            $catalog_products_query      = new WP_Query( $catalog_products_query_args );
-
-            if ( $catalog_products_query->have_posts() ):
-                while ( $catalog_products_query->have_posts() ):
-                    $catalog_products_query->the_post();
-
-                    ?>
-
-                    <?php echo get_template_part('product-content')?>
-
-                <?php
-                endwhile;
-            else :
-             esc_html_e( 'Нет постов по вашим критериям' );
-            wp_reset_postdata();
-            endif;
-            ?>
-        </div>
-        <div class="section-catalog__footer">
-            <a class="link" href="<?php echo get_home_url( null, 'products/' ) ?>">
-                Перейти в каталог
-            </a>
-        </div>
-    </div>
-</section>
-<!-- /.section-catalog -->
-
-<!-- section-about -->
-<section class="section section-about">
-    <picture>
-        <?php
-        $rew_img_id       = carbon_get_post_meta( 14, 'about_image' );
-        $img_src          = wp_get_attachment_url( $rew_img_id, 'full' );
-        $top_img_src_webp = conver_to_webp_src( $img_src );
-        ?>
-
-        <img class="section-about__img lazy"
-             src="<? echo $img_src ?>"
-             data-src="<? echo $img_src ?>" alt="">
-    </picture>
-    <div class="container section-about__container">
-        <div class="section-about__content">
-            <h2 class="page-title section-about__title">
-                <?php echo carbon_get_post_meta( 14, 'catalog_title' ); ?>
-            </h2>
-            <div class="section-about__text">
-                <?php
-                echo carbon_get_post_meta( 14, 'about_text' );
-                ?>
-            </div>
-        </div>
-</section>
-<!-- /.section-about -->
-<!-- section-contacts -->
-<section id="section-contacts" class="section section-contacts">
+ * Template name: Контакты
+ */
+  get_header();
+  ?>
+<section id="section-contacts" class="section section-contacts single-page">
     <div class="container section-contacts__container">
         <div class="section-contacts__img lazy"
              data-src=""
@@ -138,7 +13,7 @@ $top_img_src_webp = conver_to_webp_src( $img_src );
         </div>
         <header class="section__header">
             <h2 class="page-title sectoin-contacts__title">
-                <?php echo carbon_get_post_meta( get_the_ID(), 'contacts_title' ); ?>
+                <?php the_title();?>
             </h2>
         </header>
         <div class="contacts">
@@ -219,10 +94,8 @@ $top_img_src_webp = conver_to_webp_src( $img_src );
         </div>
     </div>
 </section>
-<!-- /.section-contacts -->
 
-<script>
 
-</script>
-
-<?php get_footer(); ?>
+  <?php
+    get_footer();
+  ?>
